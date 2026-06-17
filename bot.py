@@ -547,6 +547,7 @@ app.add_handler(CommandHandler("meteo", meteo))
 
 print("Bot online...") #QUESTE RIGHE DEVONO RIMANERE PER ULTIME!!!!
 if __name__ == "__main__":
+    init_db()
     scheduler.start()
     schedule_daily_meteo()   # 🔥 AGGIUNTO METEO
     load_reminders_from_db()   # DATABASE CHE TIENE I DATI ACNHE DOPO IL RIAVVIO
