@@ -9,6 +9,35 @@ from datetime import datetime, timedelta
 import sqlite3
 import requests #x meteo
 import os
+import sqlite3
+
+def init_db():
+
+    conn = sqlite3.connect("bot.db")
+    cur = conn.cursor()
+
+    # 💰 TABELLA SPESE
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS expenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            amount REAL,
+            description TEXT
+        )
+    """)
+
+    # 📅 TABELLA PROMEMORIA
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS reminders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            text TEXT,
+            event_time TEXT
+        )
+    """)
+
+    conn.commit()
+    conn.close()
 TOKEN = os.getenv("TOKEN")
 
 scheduler = BackgroundScheduler()
